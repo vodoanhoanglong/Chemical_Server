@@ -1,0 +1,7 @@
+- "!include public_blogs.yaml"
+- "!include public_categories.yaml"
+- "!include public_configurations.yaml"
+- "!include public_contacts.yaml"
+- "!include public_master_data.yaml"
+- "!include public_products.yaml"
+- "!include public_system_users.yaml"

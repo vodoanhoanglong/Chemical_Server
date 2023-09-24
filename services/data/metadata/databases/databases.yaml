@@ -1,0 +1,22 @@
+- name: geo
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: GEO_DATABASE_URL
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include geo/tables/tables.yaml"
+- name: thchemical
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: HASURA_GRAPHQL_DATABASE_URL
+      isolation_level: read-committed
+      pool_settings:
+        connection_lifetime: 600
+        idle_timeout: 180
+        retries: 1
+      use_prepared_statements: true
+  tables: "!include thchemical/tables/tables.yaml"

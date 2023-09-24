@@ -1,0 +1,80 @@
+table:
+  name: master_data
+  schema: public
+object_relationships:
+- name: creator
+  using:
+    foreign_key_constraint_on: createdBy
+- name: updater
+  using:
+    foreign_key_constraint_on: updatedBy
+array_relationships:
+- name: blogs
+  using:
+    foreign_key_constraint_on:
+      column: typeId
+      table:
+        name: blogs
+        schema: public
+insert_permissions:
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - data
+    - status
+    - type
+    - createdAt
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    set:
+      createdBy: x-hasura-User-Id
+  role: moderator
+select_permissions:
+- comment: ""
+  permission:
+    allow_aggregations: true
+    columns:
+    - data
+    - status
+    - type
+    - createdAt
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+  role: guest
+- comment: ""
+  permission:
+    allow_aggregations: true
+    columns:
+    - data
+    - status
+    - type
+    - createdAt
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+  role: moderator
+update_permissions:
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - data
+    - status
+    - type
+    - createdAt
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+    set:
+      updatedBy: x-hasura-User-Id
+  role: moderator

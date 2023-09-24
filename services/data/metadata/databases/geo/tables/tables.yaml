@@ -1,0 +1,6 @@
+- "!include public_country.yaml"
+- "!include public_district.yaml"
+- "!include public_province.yaml"
+- "!include public_timezone.yaml"
+- "!include public_village.yaml"
+- "!include public_ward.yaml"

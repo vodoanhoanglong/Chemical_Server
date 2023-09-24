@@ -1,0 +1,104 @@
+table:
+  name: system_users
+  schema: public
+object_relationships:
+- name: creator
+  using:
+    foreign_key_constraint_on: createdBy
+- name: updater
+  using:
+    foreign_key_constraint_on: updatedBy
+insert_permissions:
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - avatar
+    - code
+    - email
+    - fullName
+    - gender
+    - identityCard
+    - password
+    - phoneNumber
+    - role
+    - status
+    - createdAt
+    - dateOfBirth
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    set:
+      createdBy: x-hasura-User-Id
+  role: moderator
+select_permissions:
+- comment: ""
+  permission:
+    allow_aggregations: true
+    columns:
+    - avatar
+    - code
+    - email
+    - fullName
+    - gender
+    - identityCard
+    - password
+    - phoneNumber
+    - role
+    - status
+    - createdAt
+    - dateOfBirth
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+  role: guest
+- comment: ""
+  permission:
+    allow_aggregations: true
+    columns:
+    - avatar
+    - code
+    - email
+    - fullName
+    - gender
+    - identityCard
+    - password
+    - phoneNumber
+    - role
+    - status
+    - createdAt
+    - dateOfBirth
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+  role: moderator
+update_permissions:
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - avatar
+    - code
+    - email
+    - fullName
+    - gender
+    - identityCard
+    - password
+    - phoneNumber
+    - role
+    - status
+    - createdAt
+    - dateOfBirth
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    filter: {}
+    set:
+      updatedBy: x-hasura-User-Id
+  role: moderator

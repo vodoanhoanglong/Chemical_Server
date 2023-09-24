@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  gateway:
+    restart: always
+    image: traefik:2.5
+    labels:
+      - traefik.enable=false
+    command:
+      - --providers.docker=true
+      # - --log.level=DEBUG
+      # - --api.insecure=true
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  postgres:
+    image: postgres:14.1
+    labels:
+      - traefik.enable=false
+    ports:
+      - 5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./scripts/docker-entrypoint-initdb.d/000_createdb.sql:/docker-entrypoint-initdb.d/000_createdb.sql
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+
+  data:
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.data.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/`)"
+    depends_on:
+    - postgres
+    - events
+
+  events:
+    build:
+      context: ./services/events
+      dockerfile: Dockerfile_dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.events.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/events`)"
+    volumes:
+      - ./services/shared:/app/shared
+      - ./services/events:/app/events
+      - ./certs/dev.google-cert.json:/google-cert.json
+
+volumes:
+  db_data:

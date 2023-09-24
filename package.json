@@ -1,0 +1,12 @@
+{
+  "name": "thchemical",
+  "version": "1.0.0",
+  "description": "thchemical backend",
+  "repository": {
+    "type": "git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^7.0.0"
+  }
+}

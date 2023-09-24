@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  data:
+    image: hasura/graphql-engine:v2.33.0
+    ports:
+    - 8080
+    depends_on:
+    - events
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB:-postgres}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB:-postgres}
+      GEO_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/geo
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: http-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      HASURA_GRAPHQL_AUTH_HOOK: http://events:9000/auth/verify
+      EVENTS_SCHEMA_URL: http://events:9000/graphql
+      ACTION_URL: http://events:9000/actions
+      TRIGGER_URL: http://background:9000/triggers
+      CRONJOB_URL: http://background:9000/cronjobs
+      SCHEDULE_NOTIFICATION_HOOK: http://background:9000/schedules/notification
+
+  events:
+    ports:
+      - 9000
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      SERVICE_LOG: ${SERVICE_LOG}
+      LEVEL_LOG_GOOGLE: ${LEVEL_LOG_GOOGLE}
+      GOOGLE_APPLICATION_CREDENTIALS: /google-cert.json
+      LEVEL_LOG: ${LEVEL_LOG}
+      LOG_NAME: events
+      NODE_ENV: ${NODE_ENV}
+
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_SYSTEM_SECRET_KEY: ${JWT_SYSTEM_SECRET_KEY}
+      HASH_SECRET_KEY: ${HASH_SECRET_KEY}
+
+      GUEST_TOKEN: ${GUEST_TOKEN}

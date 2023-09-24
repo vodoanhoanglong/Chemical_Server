@@ -1,0 +1,13 @@
+INSERT INTO public.master_data (id, "createdAt", "updatedAt", "createdBy", "updatedBy", status, data, type) VALUES ('1652e9bf-bde3-4fa5-b881-992962c06bfa', '2023-09-11 15:40:17.510901+00', '2023-09-11 15:40:17.510901+00', NULL, NULL, 'active', 'https://img.freepik.com/free-psd/scooter-banner-template_23-2149395521.jpg?w=1380&t=st=1694446756~exp=1694447356~hmac=d14411c4e758bb299f969849add7645bdd917c83a01482ca2a78e892da00d22a', 'slider');
+INSERT INTO public.master_data (id, "createdAt", "updatedAt", "createdBy", "updatedBy", status, data, type) VALUES ('e1c22b2c-2d67-4239-879a-3f382bca083a', '2023-09-11 15:40:35.002118+00', '2023-09-11 15:40:35.002118+00', NULL, NULL, 'active', 'https://img.freepik.com/free-psd/airport-banner-design-template_23-2149111674.jpg?w=1380&t=st=1694446826~exp=1694447426~hmac=a1be843d8ba17cd7d7015c22213d38b9a73e69739001b9f0e4f866bae8def847', 'slider');
+INSERT INTO public.master_data (id, "createdAt", "updatedAt", "createdBy", "updatedBy", status, data, type) VALUES ('c747a07d-8e56-4d15-b560-f23ace7c08b0', '2023-09-11 15:41:02.616252+00', '2023-09-11 15:41:02.616252+00', NULL, NULL, 'active', 'https://img.freepik.com/free-vector/travel-landing-page-template-with-photo_23-2148374044.jpg?w=1380&t=st=1694446852~exp=1694447452~hmac=635c68ebaf3232b422e531baf28ae88ffc95a3d9ded9b113fc4f7b21af30ac52', 'slider');
+
+INSERT INTO public.system_users(id, "fullName", "avatar")
+VALUES ('4b7b997c-9c2a-4c71-b8ed-31e4676f4108', 'Long Vo', 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');
+
+INSERT INTO public.master_data (id, data, type) 
+VALUES ('7b2b5c47-2345-41fa-b19f-a2ff19e7adcf', 'chemicals', 'blog_tag');
+
+INSERT INTO public.blogs ("typeId", "createdBy", "title", "description", "content", "banner")
+VALUES ('7b2b5c47-2345-41fa-b19f-a2ff19e7adcf', '4b7b997c-9c2a-4c71-b8ed-31e4676f4108', 'Lợi Ích Chất Thải Fukushima', 'Do lò phản ứng đã bị hư hại, nguồn nước dùng để làm mát này đều bị nhiễm xạ và buộc phải được tích trữ tại nhà máy trong nhiều năm. Cùng với đó, nước mưa, nước ngầm tại khu vực quanh nhà máy cũng bị nhiễm phóng xạ và được thu gom theo quy trình tương tự.',
+'HTML', 'https://images.unsplash.com/photo-1620908198770-b46654453cf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');

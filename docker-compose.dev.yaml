@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:14.1
+    labels:
+      - traefik.enable=false
+    ports:
+      - 5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./scripts/docker-entrypoint-initdb.d/000_createdb.sql:/docker-entrypoint-initdb.d/000_createdb.sql
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  gateway:
+    restart: always
+    image: traefik:2.5
+    labels:
+      - traefik.enable=false
+    command:
+      - --providers.docker=true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  data:
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.data.rule=Host(`${DATA_DOMAIN}`)"
+    depends_on:
+    - postgres
+    - events
+
+  events:
+    build:
+      context: .
+      dockerfile: ./services/events/Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.events.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/edrv/hook`)"
+      # - traefik.enable=false
+    volumes:
+      - ./certs/dev.google-cert.json:/google-cert.json
+    healthcheck:
+      test:
+        ["CMD", "wget", "--quiet", "--spider", "http://localhost:9000/healthz"]
+
+volumes:
+  db_data:

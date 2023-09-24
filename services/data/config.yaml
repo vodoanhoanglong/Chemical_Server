@@ -1,0 +1,7 @@
+version: 3
+endpoint: http://data.thchemical.api
+admin_secret: hasura
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
