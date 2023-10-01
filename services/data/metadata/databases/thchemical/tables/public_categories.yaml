@@ -21,7 +21,8 @@ insert_permissions:
   permission:
     check: {}
     columns:
-    - images
+    - image
+    - icon
     - metadata
     - code
     - description
@@ -40,7 +41,8 @@ select_permissions:
   permission:
     allow_aggregations: true
     columns:
-    - images
+    - image
+    - icon
     - metadata
     - code
     - description
@@ -57,7 +59,8 @@ select_permissions:
   permission:
     allow_aggregations: true
     columns:
-    - images
+    - image
+    - icon
     - metadata
     - code
     - description
@@ -75,7 +78,8 @@ update_permissions:
   permission:
     check: {}
     columns:
-    - images
+    - image
+    - icon
     - metadata
     - code
     - description

@@ -12,8 +12,11 @@ export class Category extends BaseModel<Category> {
   @Column
   public description: string;
 
-  @Column(DataType.JSONB)
-  public images: string[];
+  @Column
+  public image: string;
+
+  @Column
+  public icon: string;
 
   @Column(DataType.JSONB)
   public metadata: object;

@@ -2,6 +2,9 @@ table:
   name: products
   schema: public
 object_relationships:
+- name: brand
+  using:
+    foreign_key_constraint_on: brandId
 - name: category
   using:
     foreign_key_constraint_on: categoryId
@@ -29,6 +32,8 @@ insert_permissions:
     - createdBy
     - id
     - updatedBy
+    - htmlContent
+    - brandId
     set:
       createdBy: x-hasura-User-Id
   role: moderator
@@ -50,6 +55,8 @@ select_permissions:
     - createdBy
     - id
     - updatedBy
+    - htmlContent
+    - brandId
     filter: {}
   role: guest
 - comment: ""
@@ -69,6 +76,8 @@ select_permissions:
     - createdBy
     - id
     - updatedBy
+    - htmlContent
+    - brandId
     filter: {}
   role: moderator
 update_permissions:
@@ -89,6 +98,8 @@ update_permissions:
     - createdBy
     - id
     - updatedBy
+    - htmlContent
+    - brandId
     filter: {}
     set:
       updatedBy: x-hasura-User-Id
