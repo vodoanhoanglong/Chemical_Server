@@ -11,6 +11,9 @@ dev: ## start server
 down: ## stop server
 	docker compose -f docker-compose.yaml -f docker-compose.local.yaml -p $(PROJECT) down
 
+deploy-develop:
+	docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+
 package: ## init migrate and database
 	@bash ./scripts/package.sh
 

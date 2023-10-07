@@ -41,7 +41,7 @@ services:
       dockerfile: ./services/events/Dockerfile
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.events.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/edrv/hook`)"
+      - "traefik.http.routers.events.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/events`)"
       # - traefik.enable=false
     volumes:
       - ./certs/dev.google-cert.json:/google-cert.json

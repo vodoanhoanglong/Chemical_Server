@@ -13,6 +13,24 @@ insert_permissions:
   permission:
     check: {}
     columns:
+    - metadata
+    - email
+    - fullName
+    - phoneNumber
+    - status
+    - createdAt
+    - updatedAt
+    - createdBy
+    - id
+    - updatedBy
+    set:
+      createdBy: x-hasura-User-Id
+  role: guest
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - metadata
     - email
     - fullName
     - phoneNumber
@@ -30,6 +48,7 @@ select_permissions:
   permission:
     allow_aggregations: true
     columns:
+    - metadata
     - email
     - fullName
     - phoneNumber
@@ -45,6 +64,7 @@ select_permissions:
   permission:
     allow_aggregations: true
     columns:
+    - metadata
     - email
     - fullName
     - phoneNumber
