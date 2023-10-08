@@ -23,8 +23,6 @@ insert_permissions:
     - createdBy
     - id
     - updatedBy
-    set:
-      createdBy: x-hasura-User-Id
   role: guest
 - comment: ""
   permission:
@@ -81,14 +79,31 @@ update_permissions:
   permission:
     check: {}
     columns:
+    - createdAt
+    - createdBy
     - email
     - fullName
+    - id
+    - metadata
     - phoneNumber
     - status
-    - createdAt
     - updatedAt
+    - updatedBy
+    filter: {}
+  role: guest
+- comment: ""
+  permission:
+    check: {}
+    columns:
+    - createdAt
     - createdBy
+    - email
+    - fullName
     - id
+    - metadata
+    - phoneNumber
+    - status
+    - updatedAt
     - updatedBy
     filter: {}
     set:
