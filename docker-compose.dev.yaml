@@ -30,7 +30,7 @@ services:
   data:
     labels:
     - "traefik.enable=true"
-    - "traefik.http.routers.data.rule=Host(`${DATA_DOMAIN}`)"
+    - "traefik.http.routers.data.rule=Host(`${DATA_DOMAIN}`) && PathPrefix(`/`)"
     depends_on:
     - postgres
     - events

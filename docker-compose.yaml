@@ -18,9 +18,9 @@ services:
       HASURA_GRAPHQL_AUTH_HOOK: http://events:9000/auth/verify
       EVENTS_SCHEMA_URL: http://events:9000/graphql
       ACTION_URL: http://events:9000/actions
-      TRIGGER_URL: http://background:9000/triggers
-      CRONJOB_URL: http://background:9000/cronjobs
-      SCHEDULE_NOTIFICATION_HOOK: http://background:9000/schedules/notification
+      TRIGGER_URL: http://events:9000/triggers
+      CRONJOB_URL: http://events:9000/cronjobs
+      SCHEDULE_NOTIFICATION_HOOK: http://events:9000/schedules/notification
 
   events:
     ports:
