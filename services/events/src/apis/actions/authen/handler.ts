@@ -1,25 +1,37 @@
 import Joi from "@hapi/joi";
-import { ErrorKey, IAction, IHandler, Platform, authorize, getRefreshToken, getToken, hasUniqueError } from "shared";
+import {
+  ErrorKey,
+  IAction,
+  IHandler,
+  Platform,
+  Role,
+  SystemUser,
+  authorize,
+  getRefreshToken,
+  getToken,
+  hasUniqueError,
+  hashPassword,
+  verifyPassword,
+} from "shared";
 import { FormRefreshToken, FormSignIn, FormSignUp } from "./schema";
 
 export const signUp: IHandler<IAction<Joi.extractType<typeof FormSignUp>>> = async ({ payload }) => {
   try {
-    // const hashedPassword = await hashPassword(payload.form.password);
+    const hashedPassword = await hashPassword(payload.form.password);
 
-    // const customer = await Customer.create({
-    //   password: hashedPassword,
-    //   email: payload.form.email,
-    //   fullName: payload.form.fullName,
-    //   role: Role.Customer,
-    //   ethData: resEthAccount,
-    // });
+    const user = await SystemUser.create({
+      password: hashedPassword,
+      email: payload.form.email,
+      fullName: payload.form.fullName,
+      role: Role.Moderator,
+    });
 
-    // const token = await getToken(customer);
-    // const refreshToken = getRefreshToken(customer, token);
+    const token = await getToken(user);
+    const refreshToken = getRefreshToken(user, token);
 
     return {
-      token: null,
-      refreshToken: null,
+      token,
+      refreshToken,
     };
   } catch (error) {
     if (hasUniqueError(error, ["phoneNumber"])) {
@@ -35,25 +47,25 @@ export const signUp: IHandler<IAction<Joi.extractType<typeof FormSignUp>>> = asy
 
 export const signIn: IHandler<IAction<Joi.extractType<typeof FormSignIn>>> = async ({ payload }) => {
   try {
-    // const customer = await Customer.findOne({
-    //   attributes: ["id", "password"],
-    //   where: {
-    //     email: payload.form.email,
-    //   },
-    // });
+    const user = await SystemUser.findOne({
+      attributes: ["id", "password"],
+      where: {
+        email: payload.form.email.toLowerCase(),
+      },
+    });
 
-    // if (!customer) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
+    if (!user) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
 
-    // const hashedPassword = await hashPassword(payload.form.password);
+    const hashedPassword = await hashPassword(payload.form.password);
 
-    // if (!verifyPassword(customer.password, hashedPassword)) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
+    if (!verifyPassword(user.password, hashedPassword)) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
 
-    // const token = await getToken(customer);
-    // const refreshToken = getRefreshToken(customer, token);
+    const token = await getToken(user);
+    const refreshToken = getRefreshToken(user, token);
 
     return {
-      token: null,
-      refreshToken: null,
+      token,
+      refreshToken,
     };
   } catch (error) {
     return Promise.reject(error);

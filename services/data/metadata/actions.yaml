@@ -1,6 +1,19 @@
-actions: []
+actions:
+- name: signIn
+  definition:
+    kind: synchronous
+    handler: '{{ACTION_URL}}'
+  permissions:
+  - role: guest
+- name: signUp
+  definition:
+    kind: synchronous
+    handler: '{{ACTION_URL}}'
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+  - name: SignInInput
+  - name: SignUpInput
+  objects:
+  - name: SignInOutput
   scalars: []

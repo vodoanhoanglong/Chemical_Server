@@ -1,0 +1,28 @@
+type Mutation {
+  signIn(
+    form: SignInInput!
+  ): SignInOutput!
+}
+
+type Mutation {
+  signUp(
+    form: SignUpInput!
+  ): SignInOutput!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  fullName: String!
+}
+
+type SignInOutput {
+  token: String!
+  refreshToken: String!
+}
+
