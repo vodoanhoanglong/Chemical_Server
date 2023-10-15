@@ -56,9 +56,8 @@ export const signIn: IHandler<IAction<Joi.extractType<typeof FormSignIn>>> = asy
 
     if (!user) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
 
-    const hashedPassword = await hashPassword(payload.form.password);
-
-    if (!verifyPassword(user.password, hashedPassword)) return Promise.reject(ErrorKey.InvalidEmailOrPassword);
+    if (!(await verifyPassword(payload.form.password, user.password)))
+      return Promise.reject(ErrorKey.InvalidEmailOrPassword);
 
     const token = await getToken(user);
     const refreshToken = getRefreshToken(user, token);
