@@ -57,7 +57,9 @@ select_permissions:
     - updatedBy
     - htmlContent
     - brandId
-    filter: {}
+    filter:
+      status:
+        _eq: active
   role: guest
 - comment: ""
   permission:
@@ -78,7 +80,9 @@ select_permissions:
     - updatedBy
     - htmlContent
     - brandId
-    filter: {}
+    filter:
+      status:
+        _eq: active
   role: moderator
 update_permissions:
 - comment: ""

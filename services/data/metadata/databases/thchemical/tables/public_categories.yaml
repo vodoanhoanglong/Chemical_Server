@@ -53,7 +53,9 @@ select_permissions:
     - createdBy
     - id
     - updatedBy
-    filter: {}
+    filter:
+      status:
+        _eq: active
   role: guest
 - comment: ""
   permission:
@@ -71,7 +73,9 @@ select_permissions:
     - createdBy
     - id
     - updatedBy
-    filter: {}
+    filter:
+      status:
+        _eq: active
   role: moderator
 update_permissions:
 - comment: ""
