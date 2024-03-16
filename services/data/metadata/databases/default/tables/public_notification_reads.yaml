@@ -1,0 +1,23 @@
+table:
+  name: notification_reads
+  schema: public
+object_relationships:
+  - name: notification
+    using:
+      foreign_key_constraint_on: notificationId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
+select_permissions:
+  - role: moderator
+    permission:
+      columns:
+        - readAt
+        - id
+        - notificationId
+        - userId
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+    comment: ""

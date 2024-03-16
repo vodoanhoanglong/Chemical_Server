@@ -1,1 +1,5 @@
+- "!include public_notification_reads.yaml"
+- "!include public_notifications.yaml"
+- "!include public_shared_videos.yaml"
 - "!include public_system_users.yaml"
+- "!include public_video_votes.yaml"

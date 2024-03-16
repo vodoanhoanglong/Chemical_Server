@@ -1,0 +1,50 @@
+table:
+  name: video_votes
+  schema: public
+insert_permissions:
+  - role: moderator
+    permission:
+      check: {}
+      set:
+        userId: x-hasura-User-Id
+      columns:
+        - createdAt
+        - id
+        - react
+        - status
+        - userId
+        - videoId
+    comment: ""
+select_permissions:
+  - role: moderator
+    permission:
+      columns:
+        - createdAt
+        - id
+        - react
+        - status
+        - userId
+        - videoId
+      filter:
+        status:
+          _eq: active
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: moderator
+    permission:
+      columns:
+        - createdAt
+        - id
+        - react
+        - status
+        - userId
+        - videoId
+      filter:
+        _and:
+          - status:
+              _eq: active
+          - userId:
+              _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""

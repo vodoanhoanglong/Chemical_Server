@@ -1,0 +1,42 @@
+table:
+  name: notifications
+  schema: public
+object_relationships:
+  - name: creator
+    using:
+      foreign_key_constraint_on: createdBy
+insert_permissions:
+  - role: moderator
+    permission:
+      check: {}
+      set:
+        createdBy: x-hasura-User-Id
+      columns:
+        - content
+        - status
+        - subtitle
+        - title
+        - createdAt
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+    comment: ""
+select_permissions:
+  - role: moderator
+    permission:
+      columns:
+        - content
+        - status
+        - subtitle
+        - title
+        - createdAt
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+      filter:
+        status:
+          _eq: active
+      allow_aggregations: true
+    comment: ""

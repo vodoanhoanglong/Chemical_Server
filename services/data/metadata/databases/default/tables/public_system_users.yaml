@@ -2,103 +2,118 @@ table:
   name: system_users
   schema: public
 object_relationships:
-- name: creator
-  using:
-    foreign_key_constraint_on: createdBy
-- name: updater
-  using:
-    foreign_key_constraint_on: updatedBy
+  - name: creator
+    using:
+      foreign_key_constraint_on: createdBy
+  - name: updater
+    using:
+      foreign_key_constraint_on: updatedBy
+array_relationships:
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: notification_reads
+          schema: public
+  - name: sharedVideos
+    using:
+      foreign_key_constraint_on:
+        column: updatedBy
+        table:
+          name: shared_videos
+          schema: public
 insert_permissions:
-- comment: ""
-  permission:
-    check: {}
-    columns:
-    - avatar
-    - code
-    - email
-    - fullName
-    - gender
-    - identityCard
-    - password
-    - phoneNumber
-    - role
-    - status
-    - createdAt
-    - dateOfBirth
-    - updatedAt
-    - createdBy
-    - id
-    - updatedBy
-    set:
-      createdBy: x-hasura-User-Id
-  role: moderator
+  - role: moderator
+    permission:
+      check: {}
+      set:
+        createdBy: x-hasura-User-Id
+      columns:
+        - avatar
+        - code
+        - email
+        - fullName
+        - gender
+        - identityCard
+        - password
+        - phoneNumber
+        - role
+        - status
+        - createdAt
+        - dateOfBirth
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+    comment: ""
 select_permissions:
-- comment: ""
-  permission:
-    allow_aggregations: true
-    columns:
-    - avatar
-    - code
-    - email
-    - fullName
-    - gender
-    - identityCard
-    - password
-    - phoneNumber
-    - role
-    - status
-    - createdAt
-    - dateOfBirth
-    - updatedAt
-    - createdBy
-    - id
-    - updatedBy
-    filter: {}
-  role: guest
-- comment: ""
-  permission:
-    allow_aggregations: true
-    columns:
-    - avatar
-    - code
-    - email
-    - fullName
-    - gender
-    - identityCard
-    - password
-    - phoneNumber
-    - role
-    - status
-    - createdAt
-    - dateOfBirth
-    - updatedAt
-    - createdBy
-    - id
-    - updatedBy
-    filter: {}
-  role: moderator
+  - role: guest
+    permission:
+      columns:
+        - avatar
+        - code
+        - email
+        - fullName
+        - gender
+        - identityCard
+        - password
+        - phoneNumber
+        - role
+        - status
+        - createdAt
+        - dateOfBirth
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - avatar
+        - code
+        - email
+        - fullName
+        - gender
+        - identityCard
+        - password
+        - phoneNumber
+        - role
+        - status
+        - createdAt
+        - dateOfBirth
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+      filter: {}
+      allow_aggregations: true
+    comment: ""
 update_permissions:
-- comment: ""
-  permission:
-    check: {}
-    columns:
-    - avatar
-    - code
-    - email
-    - fullName
-    - gender
-    - identityCard
-    - password
-    - phoneNumber
-    - role
-    - status
-    - createdAt
-    - dateOfBirth
-    - updatedAt
-    - createdBy
-    - id
-    - updatedBy
-    filter: {}
-    set:
-      updatedBy: x-hasura-User-Id
-  role: moderator
+  - role: moderator
+    permission:
+      columns:
+        - avatar
+        - code
+        - email
+        - fullName
+        - gender
+        - identityCard
+        - password
+        - phoneNumber
+        - role
+        - status
+        - createdAt
+        - dateOfBirth
+        - updatedAt
+        - createdBy
+        - id
+        - updatedBy
+      filter: {}
+      check: {}
+      set:
+        updatedBy: x-hasura-User-Id
+    comment: ""
