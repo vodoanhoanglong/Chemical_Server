@@ -1,7 +1,7 @@
 {
-  "name": "thchemical",
+  "name": "base",
   "version": "1.0.0",
-  "description": "thchemical backend",
+  "description": "base backend",
   "repository": {
     "type": "git"
   },

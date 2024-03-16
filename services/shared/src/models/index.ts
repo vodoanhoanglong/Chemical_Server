@@ -1,6 +1,6 @@
 import { IInputModel, ISequelizeOption, initSequelize } from "./base";
 
-export type ModuleModel = "thchemical" | "geo";
+export type ModuleModel = "default" | "geo";
 
 export function initDatabase(models: IInputModel<ModuleModel>, opts: ISequelizeOption) {
   return initSequelize(null, models, opts, {
@@ -9,5 +9,5 @@ export function initDatabase(models: IInputModel<ModuleModel>, opts: ISequelizeO
 }
 
 export * from "./base";
+export * from "./default";
 export * from "./geo";
-export * from "./thchemical";

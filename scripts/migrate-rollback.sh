@@ -9,8 +9,8 @@ ENV_FILE=".env"
 export $(cat $ENV_FILE | grep -v '#' | awk '/=/ {print $1}')
 
 DATA_HOST="${SCHEME}://${DATA_DOMAIN}"
-FILE_PATH=$(ls ./services/data/migrations/thchemical | sort -n | tail -n 1)
+FILE_PATH=$(ls ./services/data/migrations/default | sort -n | tail -n 1)
 VERSION=$(echo $FILE_PATH | cut -d'_' -f1)
 echo "Rolling back to version $VERSION"
 
-hasura migrate apply --version $VERSION --type down --skip-update-check --insecure-skip-tls-verify --database-name thchemical --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
+hasura migrate apply --version $VERSION --type down --skip-update-check --insecure-skip-tls-verify --database-name default --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data

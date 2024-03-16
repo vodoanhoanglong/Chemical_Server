@@ -13,5 +13,5 @@ DATA_HOST="${SCHEME}://${DATA_DOMAIN}"
 hasura migrate apply --all-databases --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
 hasura metadata apply --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
 
-hasura seed apply --database-name thchemical --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
+hasura seed apply --database-name default --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
 hasura seed apply --database-name geo --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data

@@ -9,7 +9,7 @@ import {
   isIntrospectionQuery,
 } from "shared";
 
-initDatabase("thchemical", {
+initDatabase("default", {
   host: process.env.POSTGRES_HOST,
   port: process.env.POSTGRES_PORT,
   password: process.env.POSTGRES_PASSWORD,

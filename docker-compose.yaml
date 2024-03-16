@@ -4,7 +4,7 @@ services:
   data:
     image: hasura/graphql-engine:v2.33.0
     ports:
-    - 8080
+    - 8080:8080
     depends_on:
     - events
     environment:

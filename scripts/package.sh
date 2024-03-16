@@ -21,4 +21,4 @@ install(){
 }
 
 install events
-install background
+# install background

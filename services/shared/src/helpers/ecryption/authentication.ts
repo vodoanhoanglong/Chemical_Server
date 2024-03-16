@@ -2,7 +2,7 @@ import crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 import { get } from "lodash";
 import md5 from "md5";
-import { Configuration, ConfigurationKey, StatusCode, SystemUser } from "../../models";
+import { StatusCode, SystemUser } from "../../models";
 import { ErrorKey } from "../../resources";
 import { Platform } from "../../types";
 import { isUUID } from "../data";
@@ -38,7 +38,7 @@ export async function validateToken(token: string, secretKey: string): Promise<P
   });
 }
 
-export async function getToken(user: SystemUser) {
+export function getToken(user: SystemUser) {
   const tokenPayLoad = {
     id: user.id,
     key: hashHmacSha256(user.id),
@@ -46,10 +46,8 @@ export async function getToken(user: SystemUser) {
 
   const secretKey = user instanceof SystemUser ? process.env.JWT_SYSTEM_SECRET_KEY : process.env.JWT_SECRET_KEY;
 
-  const config = await Configuration.findByPk(ConfigurationKey.TokenExpireTime, { attributes: ["value"] });
-
   return jwt.sign(tokenPayLoad, secretKey, {
-    expiresIn: parseInt(config.value, 10),
+    expiresIn: "7d",
   });
 }
 

@@ -10,5 +10,5 @@ export $(cat $ENV_FILE | grep -v '#' | awk '/=/ {print $1}')
 
 DATA_HOST="${SCHEME}://${DATA_DOMAIN}"
 
-hasura seed apply --insecure-skip-tls-verify --database-name thchemical --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
+hasura seed apply --insecure-skip-tls-verify --database-name default --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
 hasura seed apply --insecure-skip-tls-verify --database-name geo --endpoint $DATA_HOST --admin-secret $HASURA_GRAPHQL_ADMIN_SECRET --project ./services/data
