@@ -9,6 +9,8 @@ actions:
     definition:
       kind: synchronous
       handler: '{{ACTION_URL}}'
+    permissions:
+      - role: guest
 custom_types:
   enums: []
   input_objects:
